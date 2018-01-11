@@ -1,8 +1,13 @@
 {
-  "name": "graphcool",
+  "name": "graphcool-nest-example",
+  "version": "1.0.0",
+  "description": "Example project using Nest Framework and Graphcool",
+  "author": "",
+  "license": "ISC",
   "scripts": {
     "start": "nodemon -e ts,graphql -x ts-node -r dotenv/config src/index.ts",
-    "debug": "nodemon -e ts,graphql -x ts-node --inspect -r dotenv/config src/index.ts",
+    "debug":
+      "nodemon -e ts,graphql -x ts-node --inspect -r dotenv/config src/index.ts",
     "playground": "graphql playground"
   },
   "dependencies": {
@@ -26,6 +31,7 @@
     "dotenv": "4.0.0",
     "graphcool": "1.0.0-beta4.1.1",
     "nodemon": "1.14.10",
+    "prettier": "^1.10.2",
     "ts-node": "4.1.0",
     "typescript": "2.6.2"
   }
