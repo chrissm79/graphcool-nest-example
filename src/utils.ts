@@ -11,7 +11,9 @@ export function getUserId(request: any): string | null {
 
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');
-    const { userId } = jwt.verify(token, process.env.APP_SECRET) as { userId: string };
+    const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
+      userId: string;
+    };
     return userId;
   }
 

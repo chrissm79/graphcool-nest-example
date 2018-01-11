@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { Modules } from "./modules";
+import { Modules } from './modules';
 
 @Module({
   modules: [...Modules],

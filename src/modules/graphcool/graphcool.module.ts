@@ -1,10 +1,16 @@
-import { Module, Inject, NestModule, MiddlewaresConsumer, RequestMethod } from "@nestjs/common";
+import {
+  Module,
+  Inject,
+  NestModule,
+  MiddlewaresConsumer,
+  RequestMethod
+} from '@nestjs/common';
 import { graphqlExpress } from 'apollo-server-express';
-import { importSchema } from "graphql-import";
+import { importSchema } from 'graphql-import';
 import { GraphQLModule, GraphQLFactory } from '@nestjs/graphql';
-import { Graphcool } from "../../generated/graphcool";
-import { GraphcoolController } from "./graphcool.controller";
-import { graphcoolProviders } from "./graphcool.providers";
+import { Graphcool } from '../../generated/graphcool';
+import { GraphcoolController } from './graphcool.controller';
+import { graphcoolProviders } from './graphcool.providers';
 
 @Module({
   controllers: [GraphcoolController],
@@ -14,23 +20,25 @@ import { graphcoolProviders } from "./graphcool.providers";
 })
 export class GraphcoolModule implements NestModule {
   constructor(
-    @Inject("Graphcool") private readonly db: Graphcool,
+    @Inject('Graphcool') private readonly db: Graphcool,
     private readonly graphQLFactory: GraphQLFactory
   ) {}
 
   configure(consumer: MiddlewaresConsumer) {
-    const typeDefs = importSchema("./src/schema.graphql");
+    const typeDefs = importSchema('./src/schema.graphql');
     const schema = this.graphQLFactory.createSchema({ typeDefs });
 
     consumer
-      .apply(graphqlExpress(req => ({
-        schema,
-        rootValue: req,
-        context: {
-          request: req,
-          db: this.db
-        }
-      })))
+      .apply(
+        graphqlExpress(req => ({
+          schema,
+          rootValue: req,
+          context: {
+            request: req,
+            db: this.db
+          }
+        }))
+      )
       .forRoutes({ path: '/graphql', method: RequestMethod.ALL });
   }
 }

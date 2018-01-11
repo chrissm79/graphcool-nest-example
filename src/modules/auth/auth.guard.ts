@@ -1,5 +1,5 @@
 import { Guard, CanActivate, ExecutionContext } from '@nestjs/common';
-import { getUserId } from "../../utils";
+import { getUserId } from '../../utils';
 
 @Guard()
 export class AuthGuard implements CanActivate {
@@ -12,12 +12,12 @@ export class AuthGuard implements CanActivate {
       }
 
       return true;
-    } catch(err) {
+    } catch (err) {
       this.throw();
     }
   }
 
   private throw(): void {
-    throw new Error("not authorized");
+    throw new Error('not authorized');
   }
 }
